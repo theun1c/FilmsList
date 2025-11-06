@@ -10,9 +10,6 @@ namespace FilmsList
         {
             InitializeComponent();
 
-            var users = DbService.GetUsers();
-
-            Console.WriteLine($"users: {users.Count}");
         }
     }
 }

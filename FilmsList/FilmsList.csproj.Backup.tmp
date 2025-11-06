@@ -27,7 +27,5 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
-    <PackageReference Include="ReactiveUI" Version="22.2.1" />
-    <PackageReference Include="ReactiveUI.Validation" Version="6.0.5" />
   </ItemGroup>
 </Project>
