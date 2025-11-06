@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using FilmsList.Services;
+using System;
 
 namespace FilmsList
 {
@@ -7,6 +9,10 @@ namespace FilmsList
         public MainWindow()
         {
             InitializeComponent();
+
+            var users = DbService.GetUsers();
+
+            Console.WriteLine($"users: {users.Count}");
         }
     }
 }
