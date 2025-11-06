@@ -1,52 +1,47 @@
-﻿using FilmsList.Services;
-using ReactiveUI;
+﻿using FilmsList.Commands;
+using FilmsList.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FilmsList.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private string _username = string.Empty;
-        private string _password = string.Empty;
-        private string _errorMessage = string.Empty;
+        private readonly IAuthService _authService;
+
+        private string _username = "";
+        private string _password = "";
+        private string _errorMessage = "";
 
         public string Username
         {
             get => _username;
-            set => this.RaiseAndSetIfChanged(ref _username, value);
+            set { _username = value; OnPropertyChanged(); }
         }
 
         public string Password
         {
             get => _password;
-            set => this.RaiseAndSetIfChanged(ref _password, value);
+            set { _password = value; OnPropertyChanged(); }
         }
 
         public string ErrorMessage
         {
             get => _errorMessage;
-            set => this.RaiseAndSetIfChanged(ref _errorMessage, value);
+            set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        public ReactiveCommand<Unit, Unit> LoginCommand { get; }
-        public ReactiveCommand<Unit, Unit> ShowRegisterCommand { get; }
+        public ICommand LoginCommand { get; }
+        public ICommand ShowRegisterCommand { get; }
 
         public event Action? LoginSuccessful;
         public event Action? ShowRegisterRequested;
 
-        private readonly IAuthService _authService;
-
         public LoginViewModel(IAuthService authService)
         {
             _authService = authService;
-
-            LoginCommand = ReactiveCommand.Create(Login);
-            ShowRegisterCommand = ReactiveCommand.Create(() => ShowRegisterRequested?.Invoke());
+            LoginCommand = new RelayCommand(Login);
+            ShowRegisterCommand = new RelayCommand(() => ShowRegisterRequested?.Invoke());
         }
 
         private void Login()
@@ -59,7 +54,7 @@ namespace FilmsList.ViewModels
 
             if (_authService.Login(Username, Password))
             {
-                ErrorMessage = string.Empty;
+                ErrorMessage = "";
                 LoginSuccessful?.Invoke();
             }
             else

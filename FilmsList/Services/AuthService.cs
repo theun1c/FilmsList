@@ -1,10 +1,6 @@
 ﻿using FilmsList.Data;
 using FilmsList.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FilmsList.Services
 {
@@ -29,7 +25,6 @@ namespace FilmsList.Services
         {
             using var db = new AppDbContext();
 
-            // Проверяем нет ли такого пользователя
             if (db.Users.Any(u => u.Username == username || u.Email == email))
                 return false;
 

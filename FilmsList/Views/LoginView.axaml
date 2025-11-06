@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="FilmsList.Views.LoginView">
+	<StackPanel Width="300" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
+		<TextBlock Text="Вход в систему" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+		<TextBox Watermark="Логин" Text="{Binding Username}" FontSize="16" Padding="10"/>
+		<TextBox Watermark="Пароль" PasswordChar="*" Text="{Binding Password}" FontSize="16" Padding="10"/>
+
+		<Button Content="Войти" Command="{Binding LoginCommand}" FontSize="16" Padding="15,10" HorizontalAlignment="Stretch"/>
+		<Button Content="Регистрация" Command="{Binding ShowRegisterCommand}" FontSize="14" Padding="15,8" HorizontalAlignment="Stretch"/>
+
+		<TextBlock Text="{Binding ErrorMessage}" Foreground="Red" TextWrapping="Wrap" HorizontalAlignment="Center"/>
+	</StackPanel>
+</UserControl>

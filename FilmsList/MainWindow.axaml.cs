@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 using FilmsList.Services;
-using System;
+using FilmsList.ViewModels;
 
 namespace FilmsList
 {
@@ -10,6 +10,9 @@ namespace FilmsList
         {
             InitializeComponent();
 
+            // Устанавливаем DataContext
+            var authService = new AuthService();
+            DataContext = new MainWindowViewModel(authService);
         }
     }
 }
