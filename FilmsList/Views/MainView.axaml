@@ -1,9 +1,39 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="FilmsList.Views.MainView">
-	<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
-		<TextBlock Text="{Binding WelcomeMessage}" FontSize="24" FontWeight="Bold"/>
-		<TextBlock Text="Главный экран с фильмами скоро здесь!" FontSize="16"/>
-		<Button Content="Выйти" Width="100"/>
-	</StackPanel>
+
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!-- Шапка -->
+		<StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="0,0,0,20">
+			<TextBlock Text="{Binding WelcomeMessage}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+			<Button Content="Выйти" Command="{Binding LogoutCommand}" Margin="20,0,0,0" Width="80"/>
+		</StackPanel>
+
+		<!-- Поиск и фильтры -->
+		<StackPanel Grid.Row="1" Orientation="Horizontal" Spacing="15" Margin="0,0,0,20">
+			<TextBox Text="{Binding SearchText}" Watermark="Поиск фильмов..." Width="250" Height="30"/>
+			<ComboBox ItemsSource="{Binding Genres}" SelectedItem="{Binding SelectedGenre}" Width="150" Height="30"/>
+		</StackPanel>
+
+		<!-- Список фильмов -->
+		<ListBox Grid.Row="2" ItemsSource="{Binding Movies}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Border BorderBrush="LightGray" BorderThickness="0,0,0,1" Padding="15,10">
+						<StackPanel>
+							<TextBlock Text="{Binding Title}" FontSize="18" FontWeight="Bold"/>
+							<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="0,5,0,0"/>
+							<TextBlock Text="{Binding Genre.Name}" Foreground="Gray" Margin="0,5,0,0"/>
+						</StackPanel>
+					</Border>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</Grid>
 </UserControl>

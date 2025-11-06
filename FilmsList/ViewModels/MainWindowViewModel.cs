@@ -38,8 +38,9 @@ namespace FilmsList.ViewModels
 
         private void OnLoginSuccessful()
         {
-            // ПЕРЕХОДИМ НА ГЛАВНЫЙ ЭКРАН
-            CurrentViewModel = new MainViewModel(_authService);
+            var mainVM = new MainViewModel(_authService);
+            mainVM.LogoutRequested += ShowLogin;
+            CurrentViewModel = mainVM;
         }
 
         private void OnRegisterSuccessful()
